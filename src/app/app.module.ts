@@ -7,6 +7,7 @@ import { DashboardComponent } from './modules/dashboard/pages/dashboard.componen
 import { HomeComponent } from './modules/dashboard/components/home/home.component';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { SharedModule } from "./modules/shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -17,8 +18,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DashboardModule
-  ],
+    DashboardModule,
+    SharedModule
+],
   providers: [
     provideAnimationsAsync()
   ],
