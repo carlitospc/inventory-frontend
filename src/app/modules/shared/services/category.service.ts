@@ -20,11 +20,22 @@ export class CategoryService {
     return this.http.get(endPoint)
   }
 /**
- * 
+ * save categories
  * @param body save categories
  */
   saveCategorie(body:any) {
     const endPoint = `${base_url}/categories`;
     return this.http.post(endPoint, body);
   }
+
+  /**
+   * update categories
+   * @param body 
+   * @param id 
+   */
+  updateCategorie(body: any, id: any){
+    const endPoint = `${base_url}/categories/${id}`;
+    return this.http.put(endPoint, body, id);
+  }
+  
 }
