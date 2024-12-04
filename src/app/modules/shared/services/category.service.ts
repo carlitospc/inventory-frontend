@@ -10,20 +10,19 @@ const base_url = "http://localhost:8080/api/v1"
 export class CategoryService {
 
   constructor(private http: HttpClient) { }
-/**
- * get all categories
- * @returns 
- */
+  /**
+   * get all categories
+   * @returns 
+   */
   getCategories() {
-
     const endPoint = `${base_url}/categories`;
     return this.http.get(endPoint)
   }
-/**
- * save categories
- * @param body save categories
- */
-  saveCategorie(body:any) {
+  /**
+   * save categories
+   * @param body save categories
+   */
+  saveCategorie(body: any) {
     const endPoint = `${base_url}/categories`;
     return this.http.post(endPoint, body);
   }
@@ -33,7 +32,7 @@ export class CategoryService {
    * @param body 
    * @param id 
    */
-  updateCategorie(body: any, id: any){
+  updateCategorie(body: any, id: any) {
     const endPoint = `${base_url}/categories/${id}`;
     return this.http.put(endPoint, body, id);
   }
@@ -43,9 +42,19 @@ export class CategoryService {
    * @param body 
    * @param id 
    */
-    deleteCategorie(id: any){
-      const endPoint = `${base_url}/categories/${id}`;
-      return this.http.delete(endPoint);
-    }
-  
+  deleteCategorie(id: any) {
+    const endPoint = `${base_url}/categories/${id}`;
+    return this.http.delete(endPoint);
+  }
+
+ /**
+  * get categories by id
+  * @param body 
+  * @param id 
+  */
+  getCategorieById(id: any) {
+    const endPoint = `${base_url}/categories/${id}`;
+    return this.http.get(endPoint);
+  }
+
 }
