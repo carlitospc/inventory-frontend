@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { NewCategoryComponent } from '../new-category/new-category.component';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
+import { ConfirmComponent } from '../../../shared/components/confirm/confirm.component';
 
 @Component({
   selector: 'app-category',
@@ -12,7 +13,7 @@ import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/s
 })
 export class CategoryComponent implements OnInit {
 
-  private categoryServices = inject(CategoryService);
+  private categoryService = inject(CategoryService);
   public dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
 
@@ -24,8 +25,8 @@ export class CategoryComponent implements OnInit {
   dataSource = new MatTableDataSource<CategoryElement>();
 
   getCategories(): void {
-    this.categoryServices.getCategories()
-      this.categoryServices.getCategories().subscribe({
+    this.categoryService.getCategories()
+      this.categoryService.getCategories().subscribe({
         next: (data: any) => {
           console.log(data);
           this.processCategoriesResponse(data);
@@ -83,12 +84,26 @@ export class CategoryComponent implements OnInit {
     });
   } 
 
+  delete(id: any) {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: {id: id},
+    });
+    
+    dialogRef.afterClosed().subscribe((result:any) => {
+      if(result == 1) {
+        this.openSnackBar("Categoria eliminada", "Exitosa");
+        this.getCategories();
+      } else if(result == 2){
+        this.openSnackBar("Se producjo un error al eliminarar categoria", "Error");
+      }
+    });
+  }
+
   openSnackBar(message: string, action: string) : MatSnackBarRef<SimpleSnackBar> {
     return this.snackBar.open(message, action, {
       duration: 2000
     })
   }
-
 }
 
 export interface CategoryElement {
