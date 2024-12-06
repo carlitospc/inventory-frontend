@@ -28,22 +28,6 @@ export class CategoryComponent implements OnInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  getCategories(): void {
-    this.categoryService.getCategories()
-      this.categoryService.getCategories().subscribe({
-        next: (data: any) => {
-          console.log(data);
-          this.processCategoriesResponse(data);
-        },
-        error: (error: any) => {
-          console.log("error: ", error);
-        },
-        complete: () => {
-          console.log("Completed fetching categories");
-        }
-      });
-  }
-
   processCategoriesResponse(resp: any) {
     const dataCategory: CategoryElement[] = [];
     if (resp.metadata[0].code == "00") {
@@ -58,19 +42,20 @@ export class CategoryComponent implements OnInit {
     }
   }
 
-  openCategoryDialog() {
-    const dialogRef = this.dialog.open(NewCategoryComponent, {
-      width: '450px'
-    });
-
-    dialogRef.afterClosed().subscribe((result:any) => {
-      if(result == 1) {
-        this.openSnackBar("Categoria agregada", "Exitosa");
-        this.getCategories();
-      } else if(result == 2){
-        this.openSnackBar("Se producjo un error al guardar categoria", "Error");
-      }
-    });
+  getCategories(): void {
+    this.categoryService.getCategories()
+      this.categoryService.getCategories().subscribe({
+        next: (data: any) => {
+          console.log(data);
+          this.processCategoriesResponse(data);
+        },
+        error: (error: any) => {
+          console.log("error: ", error);
+        },
+        complete: () => {
+          console.log("Completed fetching categories");
+        }
+      });
   }
 
   edit(id: number, name: string, description: string){
@@ -119,7 +104,21 @@ export class CategoryComponent implements OnInit {
         complete: () => {
         }
       })
+  }
 
+  openCategoryDialog() {
+    const dialogRef = this.dialog.open(NewCategoryComponent, {
+      width: '450px'
+    });
+
+    dialogRef.afterClosed().subscribe((result:any) => {
+      if(result == 1) {
+        this.openSnackBar("Categoria agregada", "Exitosa");
+        this.getCategories();
+      } else if(result == 2){
+        this.openSnackBar("Se producjo un error al guardar categoria", "Error");
+      }
+    });
   }
 
   openSnackBar(message: string, action: string) : MatSnackBarRef<SimpleSnackBar> {

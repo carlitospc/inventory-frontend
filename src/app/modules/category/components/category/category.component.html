@@ -1,4 +1,5 @@
 <mat-card>
+    <!-- header -->
     <h2 class="alinear">Listado de categorias</h2>
     <mat-card-header>
         <div>
@@ -17,8 +18,9 @@
             </ul>
         </div>
     </mat-card-header>
-    <div mat-card-image>
-    </div>
+    <div mat-card-image></div>
+
+    <!-- data content-->
     <mat-card-content>
         <table mat-table [dataSource]="dataSource" class="mat-cell">
             <!-- id column -->
@@ -51,7 +53,10 @@
                     </button>
                 </td>
             </ng-container>
+    
+            <!-- headers -->
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <!-- data rows -->
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
         <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
