@@ -10,6 +10,7 @@ const base_url = "http://localhost:8080/api/v1"
 export class CategoryService {
 
   constructor(private http: HttpClient) { }
+
   /**
    * get all categories
    * @returns 
@@ -18,6 +19,7 @@ export class CategoryService {
     const endPoint = `${base_url}/categories`;
     return this.http.get(endPoint)
   }
+  
   /**
    * save categories
    * @param body save categories
