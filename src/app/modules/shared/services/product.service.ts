@@ -10,12 +10,51 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-    /**
-   * get all products
-   * @returns 
+  /**
+    * get all products
+    * @returns 
+    */
+  getProducts() {
+    const endPoint = `${base_url}/products`;
+    return this.http.get(endPoint)
+  }
+
+  /**
+    * save products
+    * @param body save products
+    */
+  saveProduct(body: any) {
+    const endPoint = `${base_url}/products`;
+    return this.http.post(endPoint, body);
+  }
+
+  /**
+   * update products
+   * @param body 
+   * @param id 
    */
-    getProducts() {
-      const endPoint = `${base_url}/products`;
-      return this.http.get(endPoint)
-    }
+  updateProduct(body: any, id: any) {
+    const endPoint = `${base_url}/products/${id}`;
+    return this.http.put(endPoint, body, id);
+  }
+
+  /**
+   * delete products
+   * @param body 
+   * @param id 
+   */
+  deleteProduct(id: any) {
+    const endPoint = `${base_url}/products/${id}`;
+    return this.http.delete(endPoint);
+  }
+
+ /**
+  * get product by id
+  * @param body 
+  * @param id 
+  */
+  getProductById(id: any) {
+    const endPoint = `${base_url}/products/${id}`;
+    return this.http.get(endPoint);
+  }
 }
