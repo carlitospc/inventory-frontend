@@ -75,7 +75,7 @@ export class CategoryComponent implements OnInit {
 
   delete(id: any) {
     const dialogRef = this.dialog.open(ConfirmComponent, {
-      data: {id: id},
+      data: {id: id, module: 'category'},
     });
     
     dialogRef.afterClosed().subscribe((result:any) => {
@@ -83,7 +83,7 @@ export class CategoryComponent implements OnInit {
         this.openSnackBar("Categoria eliminada", "Exitosa");
         this.getCategories();
       } else if(result == 2){
-        this.openSnackBar("Se producjo un error al eliminarar categoria", "Error");
+        this.openSnackBar("Se produjo un error al eliminarar categoria", "Error");
       }
     });
   }

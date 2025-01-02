@@ -104,7 +104,6 @@ export class NewProductComponent {
   onFileChanged(event: any) {
     this.selectedFile = event.target.files[0];
     this.nameImage = this.selectedFile.name;
-
   }
 
   updateForm(data: any){

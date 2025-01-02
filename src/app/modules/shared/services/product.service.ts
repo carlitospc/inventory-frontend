@@ -40,7 +40,6 @@ export class ProductService {
 
   /**
    * delete products
-   * @param body 
    * @param id 
    */
   deleteProduct(id: any) {
@@ -50,7 +49,6 @@ export class ProductService {
 
  /**
   * get product by id
-  * @param body 
   * @param id 
   */
   getProductById(id: any) {
