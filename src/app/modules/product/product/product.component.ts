@@ -35,7 +35,7 @@ export class ProductComponent {
       let listProduct = resp.productResponse.products;
 
       listProduct.forEach((element: ProductElement) => {
-        element.category = element.category.name;
+        //element.category = element.category.name;
         element.picture = 'data:image/jpeg;base64,' + element.picture;
         dataProduct.push(element);
       });
@@ -60,6 +60,25 @@ export class ProductComponent {
     });
   }
 
+  edit(id: number, name: string, price: number, account: number, category: any, picture: any) {
+    const dialogRef = this.dialog.open(NewProductComponent, {
+      data: { id: id, name: name, price: price, account: account, category: category },
+      width: '450px'
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result == 1) {
+        this.openSnackBar("Producto actualizado", "Exitosa");
+        this.getProducts();
+      } else if (result == 2) {
+        this.openSnackBar("Se produjo un error al actualizar producto", "Error");
+      }
+    });
+  }
+
+  delete(id: number) {
+    console.log("delete", id);
+  }
 
 
 

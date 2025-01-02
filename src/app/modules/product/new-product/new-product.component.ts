@@ -66,9 +66,9 @@ export class NewProductComponent {
     uploadImageData.append('name', data.name);
     uploadImageData.append('price', data.price);
     uploadImageData.append('account', data.account);
-    uploadImageData.append('category', data.category);console.log(uploadImageData);
+    uploadImageData.append('categoryId', data.category);
 
-    //call service to save a product
+    //call service to update a product
     if(this.data != null) {
       this.productService.updateProduct(uploadImageData, this.data.id)
         .subscribe({
@@ -82,6 +82,7 @@ export class NewProductComponent {
           }
         });
     } else {
+      //call service to save a product
       this.productService.saveProduct(uploadImageData)
       .subscribe({
         next: (data: any) => {console.log(data);
