@@ -92,6 +92,23 @@ export class ProductComponent {
     });
   }
 
+  buscar(nombre: string) {
+    if(nombre.length === 0) {
+      return this.getProducts();
+    }
+
+    this.productService.getProductByName(nombre)
+      .subscribe({
+        next: (resp: any) => {
+          this.processProductsResponse(resp);
+        },
+        error: (error: any) => {
+        },
+        complete: () => {
+        }
+      })
+  }
+
   openProductDialog() {
     const dialogRef = this.dialog.open(NewProductComponent, {
       width: '450px'

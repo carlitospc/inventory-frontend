@@ -47,12 +47,13 @@ export class ProductService {
     return this.http.delete(endPoint);
   }
 
- /**
-  * get product by id
-  * @param id 
-  */
-  getProductById(id: any) {
-    const endPoint = `${base_url}/products/${id}`;
+  /**
+   * search product by name
+   * @param name 
+   * @returns 
+   */
+  getProductByName(name: any) {
+    const endPoint = `${base_url}/products/filter/${name}`;
     return this.http.get(endPoint);
   }
 }
