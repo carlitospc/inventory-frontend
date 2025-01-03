@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,6 +8,25 @@ import { HomeComponent } from './modules/dashboard/components/home/home.componen
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { SharedModule } from "./modules/shared/shared.module";
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+
+/*function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://localhost:8082/',
+        realm: 'inventory',
+        clientId: 'angular-client'
+      },
+      initOptions: {
+        onLoad: 'login-required',
+        flow: "standard",
+        silentCheckSsoRedirectUri:
+          window.location.origin + '/assets/silent-check-sso.html'
+      },
+      loadUserProfileAtStartUp: true
+    });
+}*/
 
 @NgModule({
   declarations: [
@@ -19,10 +38,17 @@ import { SharedModule } from "./modules/shared/shared.module";
     BrowserModule,
     AppRoutingModule,
     DashboardModule,
-    SharedModule
-],
+    SharedModule,
+    KeycloakAngularModule
+  ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    /*{
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    }*/
   ],
   bootstrap: [AppComponent]
 })
