@@ -1,0 +1,1 @@
+export const FACTUS_ENDPOINT = 'https://api-sandbox.factus.com.co';

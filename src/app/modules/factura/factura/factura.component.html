@@ -1,0 +1,160 @@
+<mat-card>
+    <!-- header -->
+    <h2 class="alinear">Listado de facturas</h2>
+    <mat-card-header>
+        <div>
+            <mat-form-field hintLabel="Buscar FACTURA" appearance="fill">
+                <mat-label>Buscar facturas</mat-label>
+                <input matInput #input (keyup)="buscar(input.value)">
+            </mat-form-field>
+        </div>
+    </mat-card-header>
+    <mat-card-header>
+        <div class="right">
+            <ul>
+                <li>
+                    <button mat-raised-button color="primary" (click)="openCategoryDialog()">
+                        Agregar factura
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </mat-card-header>
+    <div mat-card-image></div>
+
+    <!-- data content-->
+    <mat-card-content>
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>Id.</th>
+                <td mat-cell *matCellDef="let element">{{element.id}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="document">
+                <th mat-header-cell *matHeaderCellDef>Document</th>
+                <td mat-cell *matCellDef="let element">{{element.document.code}}-{{element.document.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="number">
+                <th mat-header-cell *matHeaderCellDef>Number</th>
+                <td mat-cell *matCellDef="let element">{{element.number}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="api_client_name">
+                <th mat-header-cell *matHeaderCellDef>Api client Name</th>
+                <td mat-cell *matCellDef="let element">{{element.api_client_name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="reference_code">
+                <th mat-header-cell *matHeaderCellDef>Reference Code</th>
+                <td mat-cell *matCellDef="let element">{{element.reference_code}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="identification">
+                <th mat-header-cell *matHeaderCellDef>Identification</th>
+                <td mat-cell *matCellDef="let element">{{element.identification}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="graphic_representation_name">
+                <th mat-header-cell *matHeaderCellDef>Graphic Representation Name</th>
+                <td mat-cell *matCellDef="let element">{{element.graphic_representation_name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="company">
+                <th mat-header-cell *matHeaderCellDef>Company</th>
+                <td mat-cell *matCellDef="let element">{{element.company}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="trade_name">
+                <th mat-header-cell *matHeaderCellDef>Trade Name</th>
+                <td mat-cell *matCellDef="let element">{{element.api_client_name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="names">
+                <th mat-header-cell *matHeaderCellDef>Names</th>
+                <td mat-cell *matCellDef="let element">{{element.trade_name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef>Email</th>
+                <td mat-cell *matCellDef="let element">{{element.email}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef>Total</th>
+                <td mat-cell *matCellDef="let element">{{element.total}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let element">{{element.status}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="errors">
+                <th mat-header-cell *matHeaderCellDef>Errors</th>
+                <td mat-cell *matCellDef="let element">{{element.errors}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="send_email">
+                <th mat-header-cell *matHeaderCellDef>Send Email</th>
+                <td mat-cell *matCellDef="let element">{{element.send_email}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="has_claim">
+                <th mat-header-cell *matHeaderCellDef>Has Claim</th>
+                <td mat-cell *matCellDef="let element">{{element.has_claim}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="is_negotiable_instrument">
+                <th mat-header-cell *matHeaderCellDef>Is Negotiable Instrument</th>
+                <td mat-cell *matCellDef="let element">{{element.is_negotiable_instrument}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="payment_form">
+                <th mat-header-cell *matHeaderCellDef>Payment Form</th>
+                <td mat-cell *matCellDef="let element">{{element.payment_form.code}}-{{element.payment_form.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="created_at">
+                <th mat-header-cell *matHeaderCellDef>Created At</th>
+                <td mat-cell *matCellDef="let element">{{element.created_at}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="credit_notes">
+                <th mat-header-cell *matHeaderCellDef>Credit Notes</th>
+                <td mat-cell *matCellDef="let element">{{element.credit_notes}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="debit_notes">
+                <th mat-header-cell *matHeaderCellDef>Debit Notes</th>
+                <td mat-cell *matCellDef="let element">{{element.debit_notes}}</td>
+            </ng-container>
+
+            <!-- actions column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let element; let i=index;">
+                    <button mat-icon-button color="accent" (click)="edit()">
+                        <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="accent" (click)="delete()">
+                        <mat-icon aria-label="Delete">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <!-- headers -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <!-- data rows -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator
+            [length]="totalItems"
+            [pageSize]="perPage"
+            [pageSizeOptions]="[10, 50, 100, 200]"
+            showFirstLastButtons
+            (page)="pageChanged($event)">
+        </mat-paginator>
+    </mat-card-content>
+</mat-card>
